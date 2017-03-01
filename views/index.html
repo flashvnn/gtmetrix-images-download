@@ -59,12 +59,9 @@
                                 self.fetch_last_log_id = item.log_id;
                             });
                         }
-
-                        if(!isDone) {
-                            setTimeout(function () {
-                                self.getLogs();
-                            }, 2000);
-                        }
+                        setTimeout(function () {
+                            self.getLogs();
+                        }, 2000);
                     });
                 },
                 onSubmit: function () {
