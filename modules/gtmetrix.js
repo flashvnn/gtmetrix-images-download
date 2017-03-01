@@ -9,7 +9,7 @@ var GTMETRIX_DOMAIN = "https://gtmetrix.com";
 F.GTLOG = function (id, msg) {
     const timespan = new Date().getTime();
     const log = {id: id, log_id: timespan, msg: msg};
-    console.log(log);
+    //console.log(log);
     NOSQL('gtmetrix').insert(log);
 };
 
