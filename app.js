@@ -7,17 +7,17 @@ const http         = require('http'),
 
 let server = http.createServer(function (req, res) {
   let url = req.url;
-  if (url == '/') {
+  if (url === '/') {
     url += 'index.html';
   }
 
   // IMPORTANT: Your application HAS to respond to GET /health with status 200
   //            for OpenShift health monitoring
 
-  if (url == '/health') {
+  if (url === '/health') {
     res.writeHead(200);
     res.end();
-  } else if (url == '/info/gen' || url == '/info/poll') {
+  } else if (url === '/info/gen' || url === '/info/poll') {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Cache-Control', 'no-cache, no-store');
     res.end(JSON.stringify(sysInfo[url.slice(6)]()));
