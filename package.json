@@ -11,7 +11,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node --use_strict start.js"
+    "start": "node release.js"
   },
   "author": "Thao Huynh <flashvnn@gmail.com>",
   "license": "ISC"
