@@ -52,9 +52,7 @@ F.gtmetrix_fetch_images = function (id, url, has, callback) {
                 F.GTLOG(id, "DOWNLOAD ALL IMAGES COMPLETE");
                 OPERATION('compress', { path: F.path.public('/{0}/{1}'.format(CONFIG('download-dir'), id)), filename: F.path.public('/{0}/{1}.zip'.format(CONFIG('download-dir'), id))}, function(err, filename) {
                     F.GTLOG(id, 'Download URL: ' + CONFIG('base-url') + '/{0}/{1}.zip'.format(CONFIG('download-dir'), id));
-                    U.rmdirAll(F.path.public('/{0}/{1}'.format(CONFIG('download-dir'), id)), function () {
-                        F.GTLOG(id, 'DONE');
-                    });
+                    U.rmdirAll(F.path.public('/{0}/{1}'.format(CONFIG('download-dir'), id)));
                 });
             });
         } else {
