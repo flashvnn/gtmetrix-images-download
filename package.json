@@ -1,12 +1,18 @@
 {
-  "name": "openshift-cartridge-nodejs-template",
-  "version": "1.0.1",
-  "description": "Custom Node.js cartridge for OpenShift - sample application",
-  "private": true,
-  "main": "start.js",
+  "name": "gtmetrix_downloader",
+  "version": "1.0.0",
+  "description": "GTMETRIX images downloader",
+  "main": "release.js",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "total.js": "^2.3.0"
+  },
+  "devDependencies": {},
   "scripts": {
     "start": "node --use_strict start.js"
   },
-  "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
+  "author": "Thao Huynh <flashvnn@gmail.com>",
   "license": "ISC"
 }

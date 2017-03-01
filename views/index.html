@@ -1,0 +1,94 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">GTMATRIX IMAGE DOWNLOADER</a>
+    </div>
+  </div><!-- /.container -->
+</nav><!-- /.navbar -->
+<br>
+<br>
+<br>
+<br>
+<div id="app" class="container">
+  <div class="col-md-8 col-md-offset-2">
+    <form v-on:submit.prevent="onSubmit">
+      <div class="form-group">
+        <label for="txtURL">GTMATRIX Report URL</label>
+        <input v-model="form.url" required type="text" id="txtURL" name="url" class="form-control" placeholder="https://gtmetrix.com/reports/nextadventure.net/ry9wGzZF">
+      </div>
+      <div class="form-group">
+        <label for="txtContains">Image contains</label>
+        <input v-model="form.contain" required type="text" class="form-control" id="txtContains" placeholder="Contains">
+        <p class="text-warning">Download only images contain this text</p>
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+
+      <button type="button" v-on:click="getLogs" class="btn btn-danger">LOGS</button>
+    </form>
+    <br>
+    <div id="logs" class="well">
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var app = new Vue({
+            el: '#app',
+            data: {
+                form: {
+                    url: "",
+                    contain: ""
+                },
+                fetch_id: false,
+                fetch_last_log_id: 0,
+                processing: false
+            },
+            methods: {
+                getLogs: function () {
+                    var self = this;
+                    axios.get('/api/logs/' + self.fetch_id + '/' + self.fetch_last_log_id).then(function (response) {
+                        if (response.data.value.length > 0) {
+                            response.data.value.forEach(function (item) {
+                                $("#logs").prepend("<div>" + item.msg + "</div>");
+                                self.fetch_last_log_id = item.log_id;
+                            });
+                        }
+
+                        setTimeout(function () {
+                            self.getLogs();
+                        }, 2000);
+                    });
+                },
+                onSubmit: function () {
+                    var self = this;
+                    $("#logs").html("");
+                    axios.post('/api/fetch', self.form).then(function (response) {
+                        self.fetch_id = response.data.value;
+                        self.getLogs();
+                    }).catch(function (error) {
+
+                    });
+                }
+            }
+        })
+    }, false);
+
+</script>
+<style>
+  #logs{
+    overflow: scroll;
+    max-height: 400px;
+  }
+
+  #logs div {
+    white-space: nowrap;
+  }
+</style>
