@@ -20,11 +20,11 @@
     <form v-on:submit.prevent="onSubmit">
       <div class="form-group">
         <label for="txtURL">GTMATRIX Report URL</label>
-        <input v-model="form.url" required type="text" id="txtURL" name="url" class="form-control" placeholder="https://gtmetrix.com/reports/nextadventure.net/ry9wGzZF">
+        <input v-model="form.url" required type="text" id="txtURL" name="url" class="form-control" placeholder="Example: https://gtmetrix.com/reports/ionemind.com/WKxwHVvw">
       </div>
       <div class="form-group">
         <label for="txtContains">Image contains</label>
-        <input v-model="form.contain" required type="text" class="form-control" id="txtContains" placeholder="Contains">
+        <input v-model="form.contain" required type="text" class="form-control" id="txtContains" placeholder="Example: ionemind">
         <p class="text-warning">Download only images contain this text</p>
       </div>
       <button type="submit" class="btn btn-success">Submit</button>
